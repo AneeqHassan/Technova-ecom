@@ -25,6 +25,14 @@ namespace Technova_ecom.Controllers
             return View(await _context.Categories.ToListAsync());
         }
 
+        //GET: AllItems
+        public async Task<IActionResult> AllItems()
+        {
+            var categories = await _context.Categories.Include(c => c.Products).ToListAsync(); 
+            return View(categories);
+        }
+
+
         // GET: Categories/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -34,6 +42,7 @@ namespace Technova_ecom.Controllers
             }
 
             var category = await _context.Categories
+                .Include(c => c.Products)
                 .FirstOrDefaultAsync(m => m.CategoryId == id);
             if (category == null)
             {

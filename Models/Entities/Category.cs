@@ -18,6 +18,6 @@ namespace Technova_ecom.Models.Entities
         [Display(Name = "Order")]
         public int DisplayOrder { get; set; }
 
-        public ICollection<Product> Products { get; set; }
+        public ICollection<Product>? Products { get; set; }
     }
 }

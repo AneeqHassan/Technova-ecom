@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Technova_ecom.Models.Entities.Category>
+
+@{
+    ViewData["Title"] = "AllItems";
+}
+
+<h1>View All</h1>
+
+<div class="accordion" id="accordionExample">
+    @foreach(var item in Model)
+    {
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#@item.CategoryName" aria-expanded="false" aria-controls="collapseOne">
+                    @item.CategoryName
+                </button>
+            </h2>
+            <div id="@item.CategoryName" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+                <div class="accordion-body">
+                    <ul>
+                        @foreach(var product in item.Products)
+                        {
+                            <li>@product.ProductName</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+   
+    }
+</div>

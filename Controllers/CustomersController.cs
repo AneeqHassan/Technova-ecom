@@ -11,7 +11,7 @@ using Models.Entities;
 
 namespace Technova_ecom.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class CustomersController : Controller
     {
         private readonly DatabaseContext _context;

@@ -23,6 +23,13 @@ namespace Technova_ecom.Controllers
         {
             return View();
         }
+
+        public IActionResult Logout()
+        {
+       
+            Response.Cookies.Delete("jwt_token");
+            return RedirectToAction("Login", "Auth");
+        }
         [HttpPost]
         public async Task<IActionResult> Register(User user)
         {

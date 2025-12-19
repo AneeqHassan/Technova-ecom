@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using Technova_ecom.Models.Entities;
 
 namespace Technova_ecom.Controllers
 {
+    [Authorize]
     public class CategoriesController : Controller
     {
         private readonly DatabaseContext _context;
@@ -69,8 +71,10 @@ namespace Technova_ecom.Controllers
             {
                 _context.Add(category);
                 await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Category created successfully!";
                 return RedirectToAction(nameof(Index));
             }
+            TempData["error"] = "Failed to create category. Please check the input date.";
             return View(category);
         }
 

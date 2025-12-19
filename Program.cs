@@ -28,6 +28,25 @@ builder.Services.AddAuthentication("Bearer")
                 }
                 return Task.CompletedTask;
 
+            },
+            OnAuthenticationFailed = context =>
+            {
+                if(context.Exception.GetType() == typeof
+                (Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException))
+                {
+                    context.Response.Cookies.Delete("jwt_token");
+                    context.Response.Redirect("/Auth/Login?expired=true");
+                }
+                return Task.CompletedTask;
+            },
+            OnChallenge = context =>
+            {
+                context.HandleResponse();
+                if(!context.Response.HasStarted)
+                {
+                    context.Response.Redirect("/Auth/Login");
+                }
+                return Task.CompletedTask;
             }
 
         };

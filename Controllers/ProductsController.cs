@@ -47,7 +47,7 @@ namespace Technova_ecom.Controllers
         }
 
         // GET: Products/Create
-        [Authorize(Roles = "Vemdor ,Admin")]
+        [Authorize(Roles = "Vendor ,Admin")]
         public IActionResult Create()
         {
             ViewBag.Categories = new SelectList(_context.Categories, "CategoryId", "CategoryName");
